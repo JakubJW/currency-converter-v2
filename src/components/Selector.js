@@ -6,6 +6,7 @@ class Selector extends React.Component {
         this.state = { 
             currencies: [],
             isLoaded: false,
+            defaultValue: null
         }
     }
 
@@ -21,6 +22,7 @@ class Selector extends React.Component {
         .then((response) => response.json())
         .then((response) => {
             this.setState({currencies: response[0].rates});
+            this.props.defaultValue(1);
             this.setState({isLoaded: true});
         })
     }
@@ -33,6 +35,7 @@ class Selector extends React.Component {
                     this.state.isLoaded && this.state.currencies.map((currency, index) => (
                         <option key={index} value={currency.mid}>{currency.code} {currency.currency}</option>))
                 }
+                <option value="1">PLN złoty</option>
             </select> 
         )
     }

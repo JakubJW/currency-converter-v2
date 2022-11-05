@@ -16,7 +16,13 @@ class Form extends React.Component {
     calculate = (event) => {
         event.preventDefault()
         this.setState({output: this.state.nominatorValue*this.state.amount/this.state.denominatorValue})
-      }
+        console.log(this.state.nominatorValue)
+        console.log(this.state.denominatorValue)
+    }
+
+    setDefaultValue = (data) => {
+        this.setState({nominatorValue: data, denominatorValue: data})
+    }
 
     handleAmountChange = (event) => {
         this.setState({amount: event.target.value})
@@ -34,18 +40,16 @@ class Form extends React.Component {
         return (
                 <form className='form-control flex flex-col justify-between gap-5'>
                     <div className='flex flex-col gap-5'>
-                        <Selector handleValue = {this.handleNominator}/>
-                        <Selector handleValue = {this.handleDenominator}/>    
+                        <Selector handleValue = {this.handleNominator} defaultValue = {this.setDefaultValue}/>
+                        <Selector handleValue = {this.handleDenominator} defaultValue = {this.setDefaultValue}/>    
                     </div>
                     
                     <div className='flex justify-between gap-5'>
                         <input className='input input-bordered input-primary flex p-2 h-12 rounded font-sans font-medium text-right' type="number" defaultValue="0" placeholder='0' min="0" onChange={this.handleAmountChange}/>
                         
-                        <button className='btn btn-outline p-2 h-12 rounded font-sans font-medium text-center btn-primary' onClick={(this.calculate)}>
-                            Convert
-                        </button>
+                        <button className='btn btn-outline p-2 h-12 rounded font-sans font-medium text-center btn-primary' onClick={(this.calculate)}>Convert</button>
                     </div>
-                    <div className='font-sans font-medium text-custom-green text-center'>{this.state.output.toFixed(2)}</div>
+                    <div className='font-sans text-xl font-medium text-custom-green text-center'>{this.state.output.toFixed(2)}</div>
                 </form>
         )
     }

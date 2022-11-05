@@ -14,9 +14,7 @@ class App extends React.Component {
       </div>
       
       <div className="p-12 md:w-3/6 md:h-screen justify-center items-center bg-custom-blue flex flex-col gap-y-10">
-      
-            <Form />
-          
+          <Form />
       </div>
     </div>
   )}
